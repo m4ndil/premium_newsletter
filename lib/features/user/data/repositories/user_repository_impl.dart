@@ -16,7 +16,7 @@ class UserRepositoryImpl implements UserRepository {
       photoUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400',
       contact: '+1 (555) 123-4567',
       address: '123 Main Street, New York, NY 10001',
-      isActive: true,
+      isActive: false,
       activeDaysRemaining: 25,
     );
   }

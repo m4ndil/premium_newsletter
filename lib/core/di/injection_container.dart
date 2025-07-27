@@ -3,6 +3,7 @@ import 'package:premium_newsletter/features/auth/domain/usecase/login_usecase.da
 import 'package:premium_newsletter/features/auth/domain/usecase/logout_usecase.dart';
 import 'package:premium_newsletter/features/newsletter/domain/usecase/get_newsletter_usecase.dart';
 import 'package:premium_newsletter/features/notices/domain/usecase/get_notices_usecase.dart';
+import 'package:premium_newsletter/features/theme/presentation/bloc/theme_bloc.dart';
 import 'package:premium_newsletter/features/user/domain/usecase/get_user_profile_usecase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../features/auth/data/datasources/auth_local_data_source.dart';
@@ -32,22 +33,18 @@ Future<void> initializeDependencies() async {
 
   // Data sources
   getIt.registerLazySingleton<AuthLocalDataSource>(
-        () => AuthLocalDataSourceImpl(getIt()),
+    () => AuthLocalDataSourceImpl(getIt()),
   );
 
   // Repositories
   getIt.registerLazySingleton<AuthRepository>(
-        () => AuthRepositoryImpl(getIt()),
+    () => AuthRepositoryImpl(getIt()),
   );
-  getIt.registerLazySingleton<UserRepository>(
-        () => UserRepositoryImpl(),
-  );
+  getIt.registerLazySingleton<UserRepository>(() => UserRepositoryImpl());
   getIt.registerLazySingleton<NewsletterRepository>(
-        () => NewsletterRepositoryImpl(),
+    () => NewsletterRepositoryImpl(),
   );
-  getIt.registerLazySingleton<NoticeRepository>(
-        () => NoticeRepositoryImpl(),
-  );
+  getIt.registerLazySingleton<NoticeRepository>(() => NoticeRepositoryImpl());
 
   // Use cases
   getIt.registerLazySingleton(() => LoginUseCase(getIt()));
@@ -57,11 +54,12 @@ Future<void> initializeDependencies() async {
   getIt.registerLazySingleton(() => GetNoticesUseCase(getIt()));
 
   // BLoCs
-  getIt.registerFactory(() => AuthBloc(
-    loginUseCase: getIt(),
-    logoutUseCase: getIt(),
-  ));
+  getIt.registerFactory(
+    () => AuthBloc(loginUseCase: getIt(), logoutUseCase: getIt()),
+  );
   getIt.registerFactory(() => UserBloc(getIt()));
   getIt.registerFactory(() => NewsletterBloc(getIt()));
   getIt.registerFactory(() => NoticeBloc(getIt()));
+  getIt.registerFactory<ThemeBloc>(() => ThemeBloc());
+
 }

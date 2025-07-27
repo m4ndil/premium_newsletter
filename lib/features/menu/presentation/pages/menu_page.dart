@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:premium_newsletter/features/theme/presentation/bloc/theme_bloc.dart';
 import '../../../auth/presentation/bloc/auth_bloc.dart';
 
 class MenuPage extends StatelessWidget {
@@ -105,7 +107,7 @@ class MenuPage extends StatelessWidget {
                 Icons.dark_mode,
                 'Theme',
                 'Switch between light and dark mode',
-                    () => _showComingSoon(context),
+                    () =>  _showThemeDialog(context),
               ),
               _buildMenuItem(
                 context,
@@ -227,6 +229,47 @@ class MenuPage extends StatelessWidget {
       const SnackBar(
         content: Text('Coming soon!'),
         behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  void _showThemeDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Choose Theme'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.light_mode),
+              title: const Text('Light'),
+              onTap: () {
+                context.read<ThemeBloc>().add(SetTheme(ThemeMode.light));
+                Navigator.of(context).pop();
+                debugPrint('Light theme selected');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.dark_mode),
+              title: const Text('Dark'),
+              onTap: () {
+                context.read<ThemeBloc>().add(SetTheme(ThemeMode.dark));
+                Navigator.of(context).pop();
+                debugPrint('Dark theme selected');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('System'),
+              onTap: () {
+                context.read<ThemeBloc>().add(SetTheme(ThemeMode.system));
+                Navigator.of(context).pop();
+                debugPrint('System theme selected');
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
