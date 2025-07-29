@@ -35,14 +35,14 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           return MaterialApp.router(
-            title: 'Modern Flutter App',
+            title: 'Newsletter',
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
             themeMode: state.themeMode,
             routerConfig: AppRouter.router,
             debugShowCheckedModeBanner: false,
           );
-        }
+        },
       ),
     );
   }

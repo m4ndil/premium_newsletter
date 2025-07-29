@@ -39,6 +39,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
         title: Text(_titles[_currentIndex]),
         centerTitle: true,
