@@ -398,7 +398,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Icons.call,
                       color: Theme.of(
                         context,
-                      ).colorScheme.onSurface.withOpacity(0.6),
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                     const SizedBox(width: 16),
                     Text(
@@ -423,7 +423,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Icons.mail,
                       color: Theme.of(
                         context,
-                      ).colorScheme.onSurface.withOpacity(0.6),
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                     const SizedBox(width: 16),
                     Text(
